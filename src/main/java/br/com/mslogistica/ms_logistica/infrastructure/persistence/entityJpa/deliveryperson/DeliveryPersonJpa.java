@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "deliveryPerson")
@@ -28,8 +29,8 @@ public class DeliveryPersonJpa {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "deliveryPersonCode", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<DeliveryTrakingJpa> deliveryTrakings;
+    @OneToMany(mappedBy = "deliveryPersonCode", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<DeliveryTrakingJpa> deliveryTrakings = new ArrayList<>();
 
     public DeliveryPersonJpa(String name, String CPF, String phoneNumber) {
         this.name = name;
@@ -38,16 +39,30 @@ public class DeliveryPersonJpa {
     }
 
     public void updateDataDeliveryPerson(DeliveryPerson deliveryPerson) {
-        if(deliveryPerson.getCPF() != null){
+        if (deliveryPerson.getCPF() != null) {
             this.CPF = deliveryPerson.getCPF();
         }
 
-        if(deliveryPerson.getName() != null){
+        if (deliveryPerson.getName() != null) {
             this.name = deliveryPerson.getName();
         }
 
-        if(deliveryPerson.getPhoneNumber() != null){
+        if (deliveryPerson.getPhoneNumber() != null) {
             this.phoneNumber = deliveryPerson.getPhoneNumber();
         }
+    }
+
+    public void addDeliveryTraking(DeliveryTrakingJpa deliveryTraking) {
+        deliveryTrakings.add(deliveryTraking);
+        deliveryTraking.setDeliveryPersonCode(this);
+    }
+
+    public void removeDeliveryTraking(DeliveryTrakingJpa deliveryTraking) {
+        deliveryTrakings.remove(deliveryTraking);
+        deliveryTraking.setDeliveryPersonCode(null);
+    }
+
+    public void removeOrphanDeliveryTrakings() {
+        deliveryTrakings.removeIf(deliveryTraking -> deliveryTraking.getDeliveryPersonCode() == null);
     }
 }

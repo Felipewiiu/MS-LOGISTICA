@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-21T08:19:50-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2024-11-23T21:45:25-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.6 (Oracle Corporation)"
 )
 @Component
 public class DeliveryPersonMapperDtoImpl implements DeliveryPersonMapperDto {
@@ -35,18 +35,13 @@ public class DeliveryPersonMapperDtoImpl implements DeliveryPersonMapperDto {
             return null;
         }
 
-        Long personCode = null;
-        String name = null;
-        String cPF = null;
-        String phoneNumber = null;
+        DeliveryPersonDto.Builder deliveryPersonDto = DeliveryPersonDto.builder();
 
-        personCode = deliveryPerson.getPersonCode();
-        name = deliveryPerson.getName();
-        cPF = deliveryPerson.getCPF();
-        phoneNumber = deliveryPerson.getPhoneNumber();
+        deliveryPersonDto.personCode( deliveryPerson.getPersonCode() );
+        deliveryPersonDto.name( deliveryPerson.getName() );
+        deliveryPersonDto.CPF( deliveryPerson.getCPF() );
+        deliveryPersonDto.phoneNumber( deliveryPerson.getPhoneNumber() );
 
-        DeliveryPersonDto deliveryPersonDto = new DeliveryPersonDto( personCode, name, cPF, phoneNumber );
-
-        return deliveryPersonDto;
+        return deliveryPersonDto.build();
     }
 }

@@ -2,12 +2,14 @@ package br.com.mslogistica.ms_logistica.infrastructure.exeptionhandler;
 
 import br.com.mslogistica.ms_logistica.application.exeptions.NotFoundDeliveryPersonExeption;
 import br.com.mslogistica.ms_logistica.application.exeptions.NotFoundDeliveryTrakingExeption;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.Instant;
 

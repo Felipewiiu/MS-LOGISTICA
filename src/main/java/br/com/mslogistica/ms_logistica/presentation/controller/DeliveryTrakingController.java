@@ -37,6 +37,7 @@ public class DeliveryTrakingController {
     private final UpdateDeliveryStatusUseCase updateDeliveryStatusUseCase;
     private final UpdateEstimativeDeliveryTime updateEstimativeDeliveryTimeUseCase;
 
+
     @PostMapping
     @Operation(summary = "Cadastra entrega de pedidos")
     public ResponseEntity<DeliveryTrakingDto> createDeliveryTraking(@RequestBody DeliveryTrakingDto deliveryTrakingDto, UriComponentsBuilder uriBuilder) {
